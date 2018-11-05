@@ -1,0 +1,442 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 3: Se&ntilde;ales continuas</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-05"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 3: Se&ntilde;ales continuas</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introduccion</a></li><li><a href="#4">Ejercicio 1. fun1</a></li><li><a href="#5">Ejercicio 2. Graficador</a></li><li><a href="#6">Ejercicio 3: Graficador 2</a></li><li><a href="#7">Ejercicio 4. Operaciones varias del libro Lathi</a></li><li><a href="#8">M1 .1</a></li><li><a href="#13">M1 .2</a></li><li><a href="#17">M1 .3</a></li><li><a href="#21">M1 .4</a></li><li><a href="#23">Ejercicio 5. Graficas</a></li><li><a href="#24">Ejercicio 6. Energia</a></li><li><a href="#25">Ejercicio 7. Potencia</a></li></ul></div><h2 id="1">Integrantes</h2><div><ol><li>Gardu&ntilde;o Sandoval Susana Itzel</li><li>Villavicencio Castillo Rodrigo Adrian</li><li>Vargas Martinez Javier</li></ol></div><h2 id="2">Objetivos</h2><div><ol><li>Manipulaci&oacute;n b&aacute;sica de MATLAB</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas continuas</li><li>Calculo de energ&iacute;a y potencia de se&ntilde;ales continuas</li></ol></div><h2 id="3">Introduccion</h2><p>Una breve historia de MATLAB</p><pre class="codeinput"><span class="comment">%Por Cleve Moler, MathWorks</span>
+<span class="comment">%El primer MATLAB &reg; no era un lenguaje de programaci&oacute;n; Era una calculadora matricial interactiva simple.  No hab&iacute;a programas, ni cajas de herramientas, ni gr&aacute;ficos. Y no hay EDO o FFT.</span>
+<span class="comment">%En este Rinc&oacute;n de Cleve, describir&eacute; algunos hitos en la evoluci&oacute;n de MATLAB desde esos simples comienzos.</span>
+<span class="comment">%Or&iacute;genes matematicos</span>
+<span class="comment">%La base matem&aacute;tica para la primera versi&oacute;n de MATLAB fue una serie de trabajos de investigaci&oacute;n de JH Wilkinson y 18 de sus colegas, publicados entre 1965 y 1970 y recopilados posteriormente en el Manual para computaci&oacute;n autom&aacute;tica, volumen II, &Aacute;lgebra lineal, editado por Wilkinson y C. Reinsch Estos documentos presentan algoritmos, implementados en Algol 60, para resolver problemas de ecuaci&oacute;n lineal de matriz y valores propios.</span>
+
+<span class="comment">%EISPACK y LINPACK</span>
+
+<span class="comment">%En 1970, un grupo de investigadores en el Laboratorio Nacional de Argonne propuso a la Fundaci&oacute;n Nacional de Ciencia de los Estados Unidos (NSF) "explorar la metodolog&iacute;a, los costos y los recursos necesarios para producir, probar y difundir software matem&aacute;tico de alta calidad y probar, certificar, diseminar y dar soporte a paquetes de software matem&aacute;tico en ciertas &aacute;reas problem&aacute;ticas &#8221;. El grupo desarroll&oacute; EISPACK (Matrix Eigensystem Package) traduciendo los procedimientos de Algol para problemas de valores propios del manual en Fortran y trabajando extensamente en pruebas y portabilidad. La primera versi&oacute;n de EISPACK se lanz&oacute; en 1971 y la segunda en 1976.</span>
+<span class="comment">%En 1975, cuatro de nosotros, Jack Dongarra, Pete Stewart, Jim Bunch y yo, propusimos a la NSF otro proyecto de investigaci&oacute;n que investigar&iacute;a m&eacute;todos para el desarrollo de software matem&aacute;tico. Un subproducto ser&iacute;a el propio software, denominado LINPACK, para el paquete de ecuaciones lineales. Este proyecto tambi&eacute;n se centr&oacute; en Argonne.</span>
+<span class="comment">%LINPACK se origin&oacute; en Fortran; no implicaba traducci&oacute;n de algol. El paquete conten&iacute;a 44 subrutinas en cada una de las cuatro precisiones num&eacute;ricas.</span>
+<span class="comment">%En cierto sentido, los proyectos LINPACK y EISPACK fueron fallos. Hab&iacute;amos propuesto proyectos de investigaci&oacute;n a la NSF para "explorar la metodolog&iacute;a, los costos y los recursos necesarios para producir, probar y difundir software matem&aacute;tico de alta calidad". Nunca escribimos un informe o documento sobre esos objetivos. Solo producimos software.</span>
+<span class="comment">%MATLAB historico</span>
+<span class="comment">%En la d&eacute;cada de 1970 y principios de la d&eacute;cada de 1980, estaba ense&ntilde;ando &Aacute;lgebra Lineal y An&aacute;lisis Num&eacute;rico en la Universidad de Nuevo M&eacute;xico y quer&iacute;a que mis estudiantes tuvieran f&aacute;cil acceso a LINPACK y EISPACK sin escribir los programas de Fortran. Con "acceso f&aacute;cil", me refer&iacute;a a no pasar por el procesamiento por lotes remoto y el proceso repetido de edici&oacute;n-compilaci&oacute;n-enlace-carga-ejecuci&oacute;n que normalmente se requer&iacute;a en la computadora central del campus.</span>
+<span class="comment">%Entonces, estudi&eacute; el libro Algoritmos + Estructuras de datos = programas de Niklaus Wirth y aprend&iacute; a analizar lenguajes de programaci&oacute;n. Escrib&iacute; el primer MATLAB, un acr&oacute;nimo de Matrix Laboratory, en Fortran, con la matriz como el &uacute;nico tipo de datos. El proyecto fue una especie de pasatiempo, un nuevo aspecto de la programaci&oacute;n para que yo pueda aprender y algo para que mis alumnos usen. Nunca hubo ning&uacute;n apoyo externo formal, y ciertamente ning&uacute;n plan de negocios.</span>
+<span class="comment">%Este primer MATLAB fue solo una calculadora matricial interactiva. Esta instant&aacute;nea de la pantalla de inicio muestra todas las palabras y funciones reservadas. Solo hay 71. Para agregar otra funci&oacute;n, ten&iacute;a que obtener el c&oacute;digo fuente de mi parte, escribir una subrutina Fortran, agregar el nombre de su funci&oacute;n a la tabla de an&aacute;lisis y recompilar MATLAB.</span>
+<span class="comment">%Pas&eacute; el a&ntilde;o acad&eacute;mico 1979&#8211;80 en Stanford, donde ense&ntilde;&eacute; el curso de posgrado en An&aacute;lisis Num&eacute;rico e introduje la clase en esta calculadora matricial. Algunos de los estudiantes estaban estudiando temas como la teor&iacute;a de control y el procesamiento de se&ntilde;ales, de los que no sab&iacute;a nada. Sin embargo, las matrices fueron fundamentales para las matem&aacute;ticas en estas asignaturas, y MATLAB fue de utilidad inmediata para los estudiantes.</span>
+</pre><h2 id="4">Ejercicio 1. fun1</h2><p>Crea una funci&oacute;n que se llame fun1 y reciba dos parametros <img src="main_eq08589834809570054062.png" alt="$\omega$"> y <img src="main_eq05508344529756732484.png" alt="$a$"> la funci&oacute;n debe regresar la evaluaci&oacute;n <img src="main_eq01407365636722940873.png" alt="$F(\omega)=a/(a^2+\omega^2)$">, esta funci&oacute;n debe trabajr con <img src="main_eq16064389548595522758.png" alt="$a\in R$"> y <img src="main_eq02576817051637404792.png" alt="$t\in  R^n$">. Debe mostrar su c&oacute;digo en el reporte (sin ejecutar).</p><pre class="language-matlab">
+<span class="keyword">function</span> [F] = fun1(w,a)
+
+    F = a./(a^2+w.^2);
+<span class="keyword">end</span>
+
+</pre><h2 id="5">Ejercicio 2. Graficador</h2><pre class="codeinput">graficador1(fun1(linspace(-2,2),1),-2,2);
+</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <h2 id="6">Ejercicio 3: Graficador 2</h2><pre class="codeinput"><span class="comment">%Construya una funci&oacute;n que gr&aacute;fique funciones de $f:R\rightarrow R^2$ en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de la transformada de Fourier $F(w)$ en $[-10,10]$ de la funci&oacute;n $f(t)=e^{-2t}u(t)$, puede utilizar una funci&oacute;n anonima para este fin, no debe incluir el c&oacute;digo, solo el uso de la funci&oacute;n para mostrarla gr&aacute;fica. Reporte la gr&aacute;fica de $f(t)$ de $[-1,5]$ (recuerde que ya tiene una funci&oacute;n para esto). Reporte del espectro de magnitud y del espectro de fase en $[-10,10]$ (puedes con sultar con help la descripci&oacute;n de abs, angle, atan2). Solo reporte las graficas.</span>
+<span class="comment">%syms t w</span>
+<span class="comment">%f = exp(-2*t)*heaviside(t);</span>
+<span class="comment">%F = fourier(f,t,w);</span>
+graficador1(@(t) exp(-2*t).*(t&gt;=0),-1,5);
+</pre><img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="7">Ejercicio 4. Operaciones varias del libro Lathi</h2><h2 id="8">M1 .1</h2><p>Se graficara la funcion <img src="main_eq15580559951526136402.png" alt="$f(t)=(e^-t)*(cos(2*pi))$"></p><pre class="codeinput"><span class="comment">% Se le pide al usuario ingresar un rango de evaluacion para la variable t</span>
+
+<span class="comment">% a=input('Ingrese lim inferior :');</span>
+<span class="comment">% b=input('Ingrese lim superior :');</span>
+t=(-2:0.01:2);
+F= @(t)exp (t.*-1).*cos(2*pi*t);
+f=F(t);
+figure(1);
+plot(t,F(t),<span class="string">'r'</span>); grid;
+xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f (t)'</span>);
+</pre><img vspace="5" hspace="5" src="main_03.png" alt=""> <h2 id="13">M1 .2</h2><p>En el presente ejercicio se muestra graficamente un escalon unitario</p><pre class="codeinput"><span class="comment">%%(al escalon se le pasa un vector t:(-2:2))</span>
+t2=-2:2;
+u = @(t2) t2&gt;=0;
+figure(2)
+plot(t2,u(t2),<span class="string">'b'</span>);
+xlabel(<span class="string">'t'</span>);ylabel(<span class="string">'f (t)'</span>);grid;
+</pre><img vspace="5" hspace="5" src="main_04.png" alt=""> <pre class="codeinput"><span class="comment">% Como tal la grafica no nos define un escalon unitario, puesto que,</span>
+<span class="comment">% solo se grafica una recta;  haciedo unos cambios en el codigo</span>
+<span class="comment">% esta nueva grafica nos muestra lo siguiente</span>
+figure(3)
+t3 = (-2:0.01:2);
+plot (t3,u(t3));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'u (t)'</span>);grid;
+axis ([-2 2 -0.1 1.1]);
+
+<span class="comment">% Los cambios fueron que al vector t, se le dan aun mas peque?intervalos</span>
+<span class="comment">% del rango -2&lt;t&lt;2</span>
+<span class="comment">% Y se elige un escalamiento m?optimo para visualizar u(t)</span>
+</pre><img vspace="5" hspace="5" src="main_05.png" alt=""> <pre class="codeinput"><span class="comment">% Para finalizar con este inciso se muestra una grafica comun en se?s.</span>
+<span class="comment">%El pulso unitario</span>
+figure(4)
+p=@(t4) (t4&gt;=0) &amp; (t4&lt;1);
+t4=(-1:0.01:2);
+plot(t4,p(t4));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'p(t)=u(t)-u (t-1)'</span>);grid;
+axis([-1 2 -.1 1.1]);
+</pre><img vspace="5" hspace="5" src="main_06.png" alt=""> <h2 id="17">M1 .3</h2><p>En este inciso se realizaran operaciones de escalamiento y desplazamiento de se?s Definimos la siguiente se? % <img src="main_eq16434184499788090868.png" alt="$g(t)=f(t)u(t)=e^-t cos(2*pi) u(t)$"> Como tal, en el entorno de matlab no es posible hacer dicha multiplicacion de se?s, se necesita escribir explicitamente g(t) Despues se pueden aplicar escalamientos &amp; desplazamientos Ejemplo, se busca la grafica de <img src="main_eq14491512693946539684.png" alt="$g(2t+1)$"> en un intervalo de -2&lt;t&lt;2</p><pre class="codeinput">figure(5);
+g=@(t5) exp (-t5).*cos (2*pi*t5).*(t5&gt;=0);
+ t5 = (-2:0.01:2);
+ plot(t5,g(2*t5+1)); xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g (2t+1)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="main_07.png" alt=""> <pre class="codeinput"> <span class="comment">% Ahora consideramos la grafica $g(-t+1)$ en el mismo intervalo -2&lt;t&lt;2</span>
+ figure(6);
+ plot(t5,g(-(t5)+1)); xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g (-t+1)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="main_08.png" alt=""> <pre class="codeinput"> <span class="comment">% Dadas las dos graficas anteriores se busca mostrar la grafica de</span>
+ <span class="comment">% la siguiente operacion entre estas se?s</span>
+ <span class="comment">% $g(2t + 1) + g(-t + 1)$</span>
+ figure(7);
+ plot(t5,g(2*t5+1) +g(-t5+1)); xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'h (t)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="main_09.png" alt=""> <h2 id="21">M1 .4</h2><p>En este inciso se requiere calcular la energ?e una se?dada Dicha se?es: <img src="main_eq04633786787935813917.png" alt="$x(t) = e^{-t}(u(t) - u(t - 1))$"> Y la energ?e define como: <img src="main_eq06716131752369017572.png" alt="$$ E(x)=\int_{-\infty}^\infty |f(x)|^2 dx = \int_0^1 e^{-2t} dt $$"></p><pre class="codeinput">x=@(t6)exp (-t6).*((t6&gt;=0)&amp;(t6&lt;1));
+t6 = (0:0.01:1);
+E =sum(x (t6).*x(t6)*0.01);
+x_squared=@(t6)exp (-t6).*((t6&gt;=0)&amp;(t6&lt;1));
+E = quad(x_squared,0,1);
+display(E);
+</pre><pre class="codeoutput">
+E =
+
+    0.6321
+
+</pre><h2 id="23">Ejercicio 5. Graficas</h2><p>Resuelve el problema 1.2.2 usando las herramientas del paso anterior.</p><pre class="codeinput"><span class="comment">%%Graficas</span>
+
+<span class="comment">%x(t)</span>
+t9=(-7:0.01:7);
+u = @(t9) -t9.*((t9&gt;=-4) &amp; (t9&lt;0)) + t9.*((t9&gt;=0) &amp; (t9&lt;2));
+
+subplot(2,3,1);
+plot(t9,u(t9),<span class="string">'b'</span>);
+title(<span class="string">'x(t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f (t)'</span>);
+grid;
+
+<span class="comment">%x(t-4)</span>
+subplot(2,3,2);
+plot(t9,u(t9-4),<span class="string">'g'</span>);
+title(<span class="string">'x(t-4)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f (t)'</span>);
+grid;
+
+<span class="comment">%x(t/1.5)</span>
+subplot(2,3,3);
+plot(t9,u(t9/1.5),<span class="string">'g'</span>);
+title(<span class="string">'x(t/1.5)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f (t)'</span>);
+grid;
+
+<span class="comment">%x(-t)</span>
+subplot(2,3,4);
+plot(t9,u(-t9),<span class="string">'g'</span>);
+title(<span class="string">'x(-t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f (t)'</span>);
+grid;
+
+<span class="comment">%x(2t-4)</span>
+subplot(2,3,5);
+plot(t9,u(t9.*2-4),<span class="string">'g'</span>);
+title(<span class="string">'x(2t-4)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f (t)'</span>);
+grid;
+
+<span class="comment">%x(2-t)</span>
+subplot(2,3,6);
+plot(t9,u(-(t9-2)),<span class="string">'g'</span>);
+title(<span class="string">'x(2-t)'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f (t)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="main_10.png" alt=""> <h2 id="24">Ejercicio 6. Energia</h2><pre class="language-matlab">
+<span class="keyword">function</span> [E] = energia(f)
+
+    <span class="keyword">if</span> strcmp(class(f),<span class="string">'function_handle'</span>) <span class="comment">%funcion anonima</span>
+       disp(<span class="string">'Es una funcion anonima'</span>);
+       E = integral(f,-Inf,Inf);
+       
+      
+    <span class="keyword">else</span> 
+         <span class="comment">%Una expresion con variables simbolicas y funcion anonima</span>
+         E = int(abs(f)*abs(f),x,-Inf,Inf); <span class="comment">%Calcula la integral definida de f respecto de la variable s.</span>
+    
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+</pre><h2 id="25">Ejercicio 7. Potencia</h2><pre class="language-matlab">
+<span class="keyword">function</span> [P] = potencia(f)
+    T = input(<span class="string">'Cuanto vale T en la funcion: '</span>);
+    <span class="keyword">if</span> strcmp(class(f),<span class="string">'function_handle'</span>) <span class="comment">%funcion anonima</span>
+       disp(<span class="string">'Es una funcion anonima'</span>);
+       P = integral(f,-T/2,T/2);
+       
+      
+    <span class="keyword">else</span> 
+         <span class="comment">%Una expresion con variables simbolicas y funcion anonima</span>
+         P = int(f,x,-T/2,T/2); <span class="comment">%Calcula la integral definida de f respecto de la variable s.</span>
+    
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 3: Señales continuas
+
+%% Integrantes
+%
+% # Garduño Sandoval Susana Itzel
+% # Villavicencio Castillo Rodrigo Adrian
+% # Vargas Martinez Javier
+%
+%% Objetivos
+% # Manipulación básica de MATLAB
+% # Gráficas de señales reales y complejas continuas
+% # Calculo de energía y potencia de señales continuas
+%
+%% Introduccion
+% Una breve historia de MATLAB
+%Por Cleve Moler, MathWorks
+%El primer MATLAB ® no era un lenguaje de programación; Era una calculadora matricial interactiva simple.  No había programas, ni cajas de herramientas, ni gráficos. Y no hay EDO o FFT.
+%En este Rincón de Cleve, describiré algunos hitos en la evolución de MATLAB desde esos simples comienzos.
+%Orígenes matematicos
+%La base matemática para la primera versión de MATLAB fue una serie de trabajos de investigación de JH Wilkinson y 18 de sus colegas, publicados entre 1965 y 1970 y recopilados posteriormente en el Manual para computación automática, volumen II, Álgebra lineal, editado por Wilkinson y C. Reinsch Estos documentos presentan algoritmos, implementados en Algol 60, para resolver problemas de ecuación lineal de matriz y valores propios.
+
+%EISPACK y LINPACK
+
+%En 1970, un grupo de investigadores en el Laboratorio Nacional de Argonne propuso a la Fundación Nacional de Ciencia de los Estados Unidos (NSF) "explorar la metodología, los costos y los recursos necesarios para producir, probar y difundir software matemático de alta calidad y probar, certificar, diseminar y dar soporte a paquetes de software matemático en ciertas áreas problemáticas ”. El grupo desarrolló EISPACK (Matrix Eigensystem Package) traduciendo los procedimientos de Algol para problemas de valores propios del manual en Fortran y trabajando extensamente en pruebas y portabilidad. La primera versión de EISPACK se lanzó en 1971 y la segunda en 1976.
+%En 1975, cuatro de nosotros, Jack Dongarra, Pete Stewart, Jim Bunch y yo, propusimos a la NSF otro proyecto de investigación que investigaría métodos para el desarrollo de software matemático. Un subproducto sería el propio software, denominado LINPACK, para el paquete de ecuaciones lineales. Este proyecto también se centró en Argonne.
+%LINPACK se originó en Fortran; no implicaba traducción de algol. El paquete contenía 44 subrutinas en cada una de las cuatro precisiones numéricas.
+%En cierto sentido, los proyectos LINPACK y EISPACK fueron fallos. Habíamos propuesto proyectos de investigación a la NSF para "explorar la metodología, los costos y los recursos necesarios para producir, probar y difundir software matemático de alta calidad". Nunca escribimos un informe o documento sobre esos objetivos. Solo producimos software.
+%MATLAB historico
+%En la década de 1970 y principios de la década de 1980, estaba enseñando Álgebra Lineal y Análisis Numérico en la Universidad de Nuevo México y quería que mis estudiantes tuvieran fácil acceso a LINPACK y EISPACK sin escribir los programas de Fortran. Con "acceso fácil", me refería a no pasar por el procesamiento por lotes remoto y el proceso repetido de edición-compilación-enlace-carga-ejecución que normalmente se requería en la computadora central del campus.
+%Entonces, estudié el libro Algoritmos + Estructuras de datos = programas de Niklaus Wirth y aprendí a analizar lenguajes de programación. Escribí el primer MATLAB, un acrónimo de Matrix Laboratory, en Fortran, con la matriz como el único tipo de datos. El proyecto fue una especie de pasatiempo, un nuevo aspecto de la programación para que yo pueda aprender y algo para que mis alumnos usen. Nunca hubo ningún apoyo externo formal, y ciertamente ningún plan de negocios.
+%Este primer MATLAB fue solo una calculadora matricial interactiva. Esta instantánea de la pantalla de inicio muestra todas las palabras y funciones reservadas. Solo hay 71. Para agregar otra función, tenía que obtener el código fuente de mi parte, escribir una subrutina Fortran, agregar el nombre de su función a la tabla de análisis y recompilar MATLAB.
+%Pasé el año académico 1979–80 en Stanford, donde enseñé el curso de posgrado en Análisis Numérico e introduje la clase en esta calculadora matricial. Algunos de los estudiantes estaban estudiando temas como la teoría de control y el procesamiento de señales, de los que no sabía nada. Sin embargo, las matrices fueron fundamentales para las matemáticas en estas asignaturas, y MATLAB fue de utilidad inmediata para los estudiantes.
+%% Ejercicio 1. fun1
+% Crea una función que se llame fun1 y reciba dos parametros $\omega$ y $a$ la función debe regresar la evaluación $F(\omega)=a/(a^2+\omega^2)$, esta función debe trabajr con $a\in R$ y $t\in  R^n$. Debe mostrar su código en el reporte (sin ejecutar).
+% 
+% <include>fun1.m</include>
+%% Ejercicio 2. Graficador
+graficador1(fun1(linspace(-2,2),1),-2,2);
+%% Ejercicio 3: Graficador 2
+%Construya una función que gráfique funciones de $f:R\rightarrow R^2$ en el formato de su elección y pruebe su código mostrando la gráfica de la transformada de Fourier $F(w)$ en $[-10,10]$ de la función $f(t)=e^{-2t}u(t)$, puede utilizar una función anonima para este fin, no debe incluir el código, solo el uso de la función para mostrarla gráfica. Reporte la gráfica de $f(t)$ de $[-1,5]$ (recuerde que ya tiene una función para esto). Reporte del espectro de magnitud y del espectro de fase en $[-10,10]$ (puedes con sultar con help la descripción de abs, angle, atan2). Solo reporte las graficas.
+%syms t w
+%f = exp(-2*t)*heaviside(t);
+%F = fourier(f,t,w);
+graficador1(@(t) exp(-2*t).*(t>=0),-1,5);
+%% Ejercicio 4. Operaciones varias del libro Lathi 
+%% M1 .1
+%% 
+% Se graficara la funcion $f(t)=(e^-t)*(cos(2*pi))$
+%% 
+
+% Se le pide al usuario ingresar un rango de evaluacion para la variable t 
+
+% a=input('Ingrese lim inferior :');
+% b=input('Ingrese lim superior :'); 
+t=(-2:0.01:2);
+F= @(t)exp (t.*-1).*cos(2*pi*t);
+f=F(t);
+figure(1);
+plot(t,F(t),'r'); grid;
+xlabel('t');ylabel('f (t)');
+%% 
+%% 
+
+%% M1 .2 
+% En el presente ejercicio se muestra graficamente un escalon unitario
+%%(al escalon se le pasa un vector t:(-2:2))
+t2=-2:2;
+u = @(t2) t2>=0;
+figure(2)
+plot(t2,u(t2),'b');
+xlabel('t');ylabel('f (t)');grid;
+%% 
+
+% Como tal la grafica no nos define un escalon unitario, puesto que, 
+% solo se grafica una recta;  haciedo unos cambios en el codigo
+% esta nueva grafica nos muestra lo siguiente 
+figure(3)
+t3 = (-2:0.01:2); 
+plot (t3,u(t3)); 
+xlabel('t'); ylabel('u (t)');grid;
+axis ([-2 2 -0.1 1.1]);
+
+% Los cambios fueron que al vector t, se le dan aun mas peque?intervalos 
+% del rango -2<t<2
+% Y se elige un escalamiento m?optimo para visualizar u(t)
+%% 
+
+% Para finalizar con este inciso se muestra una grafica comun en se?s.
+%El pulso unitario 
+figure(4)
+p=@(t4) (t4>=0) & (t4<1);
+t4=(-1:0.01:2);
+plot(t4,p(t4));
+xlabel('t'); ylabel('p(t)=u(t)-u (t-1)');grid;
+axis([-1 2 -.1 1.1]);
+%% 
+
+%% M1 .3 
+% En este inciso se realizaran operaciones
+% de escalamiento y desplazamiento de se?s
+% Definimos la siguiente se? % $g(t)=f(t)u(t)=e^-t cos(2*pi) u(t)$
+% Como tal, en el entorno de matlab no es posible hacer dicha multiplicacion 
+% de se?s, se necesita escribir explicitamente g(t) 
+% Despues se pueden aplicar escalamientos & desplazamientos
+% Ejemplo, se busca la grafica de $g(2t+1)$ en un intervalo de -2<t<2
+figure(5);
+g=@(t5) exp (-t5).*cos (2*pi*t5).*(t5>=0);
+ t5 = (-2:0.01:2);
+ plot(t5,g(2*t5+1)); xlabel('t'); ylabel('g (2t+1)'); grid;
+ %% 
+ 
+ % Ahora consideramos la grafica $g(-t+1)$ en el mismo intervalo -2<t<2
+ figure(6);
+ plot(t5,g(-(t5)+1)); xlabel('t'); ylabel('g (-t+1)'); grid;
+ %% 
+ 
+ % Dadas las dos graficas anteriores se busca mostrar la grafica de 
+ % la siguiente operacion entre estas se?s
+ % $g(2t + 1) + g(-t + 1)$
+ figure(7);
+ plot(t5,g(2*t5+1) +g(-t5+1)); xlabel('t'); ylabel('h (t)'); grid;
+ 
+%% 
+ 
+%% M1 .4
+% En este inciso se requiere calcular la energ?e una se?dada
+% Dicha se?es:
+% $x(t) = e^{-t}(u(t) - u(t - 1))$
+% Y la energ?e define como:
+% $$ E(x)=\int_{-\infty}^\infty |f(x)|^2 dx = \int_0^1 e^{-2t} dt $$
+x=@(t6)exp (-t6).*((t6>=0)&(t6<1));
+t6 = (0:0.01:1);
+E =sum(x (t6).*x(t6)*0.01);
+x_squared=@(t6)exp (-t6).*((t6>=0)&(t6<1));
+E = quad(x_squared,0,1);
+display(E);
+%% 
+%% Ejercicio 5. Graficas
+% Resuelve el problema 1.2.2 usando las herramientas del paso anterior.
+%%Graficas
+
+%x(t)
+t9=(-7:0.01:7);
+u = @(t9) -t9.*((t9>=-4) & (t9<0)) + t9.*((t9>=0) & (t9<2));
+
+subplot(2,3,1);
+plot(t9,u(t9),'b');
+title('x(t)');
+xlabel('t');
+ylabel('f (t)');
+grid;
+
+%x(t-4)
+subplot(2,3,2);
+plot(t9,u(t9-4),'g');
+title('x(t-4)');
+xlabel('t');
+ylabel('f (t)');
+grid;
+
+%x(t/1.5)
+subplot(2,3,3);
+plot(t9,u(t9/1.5),'g');
+title('x(t/1.5)');
+xlabel('t');
+ylabel('f (t)');
+grid;
+
+%x(-t)
+subplot(2,3,4);
+plot(t9,u(-t9),'g');
+title('x(-t)');
+xlabel('t');
+ylabel('f (t)');
+grid;
+
+%x(2t-4)
+subplot(2,3,5);
+plot(t9,u(t9.*2-4),'g');
+title('x(2t-4)');
+xlabel('t');
+ylabel('f (t)');
+grid;
+
+%x(2-t)
+subplot(2,3,6);
+plot(t9,u(-(t9-2)),'g');
+title('x(2-t)');
+xlabel('t');
+ylabel('f (t)');
+grid;
+
+%% Ejercicio 6. Energia
+% <include>energia.m</include>
+%% Ejercicio 7. Potencia
+% <include>potencia.m</include>
+
+
+ 
+    
+##### SOURCE END #####
+--></body></html>
