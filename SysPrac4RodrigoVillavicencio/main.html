@@ -1,0 +1,415 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Practica 4. Convoluci&oacute;n y Correlaci&oacute;n de se&ntilde;ales en tiempo continuo</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-12"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Practica 4. Convoluci&oacute;n y Correlaci&oacute;n de se&ntilde;ales en tiempo continuo</h1><!--introduction--><p>RPL04</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introducci&oacute;n</a></li><li><a href="#10">Nota</a></li><li><a href="#16">PR04. Ejercicio 1.</a></li><li><a href="#21">Grafica con piecewise</a></li><li><a href="#24">PR04. Ejercicio 3.</a></li><li><a href="#32">PR06. Ejercicio E.</a></li><li><a href="#38">PR06. Ejercicio F.</a></li></ul></div><h2 id="1">Integrantes</h2><div><ol><li>Gardu&ntilde;o Sandoval Susana Itzel</li><li>Villavicencio Castillo Rodrigo Adrian</li><li>Vargas Martinez Javier</li></ol></div><h2 id="2">Objetivos</h2><div><ol><li>Conocer m&eacute;todos b&aacute;sicos de integraci&oacute;n num&eacute;rica</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li><li>Simular convoluciones y correlaciones de se&ntilde;ales continuas</li></ol></div><h2 id="3">Introducci&oacute;n</h2><p>Como introducci&oacute;n elabore un reporte de los m&eacute;todos descritos en la lista de reproducci&oacute;n que incluya el desarrollo de los ejemplos expuestos.</p><p><img vspace="5" hspace="5" src="img1.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="img2.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="img3.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="img4.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="img5.jpg" alt=""> </p><p><img vspace="5" hspace="5" src="img5.jpg" alt=""> </p><h2 id="10">Nota</h2><p>Se realizo un cambio al archivo convconm convirtiendola en convGrl. Es en convGral donde se trato de hacerlo m&aacute;s general, haciendo que la gr&aacute;fica se acomodara automaticamente en lo largo (encontrando en donde iba a existir la convoluci&oacute;n) y en la altura (determinando los puntos m&aacute;s grandes que de la convoluci&oacute;n)</p><pre class="language-matlab">
+<span class="keyword">function</span> convGral(x,h)
+  figure <span class="comment">% Se crea una figura para hacer las gr&aacute;ficas</span>
+  c=Comienza(x,h);
+  f=Finaliza(x,h);
+  dtau = 0.005; <span class="comment">% Base de los rectangulos para realizar la integral </span>
+  tau = (c-2):dtau:(f+2); <span class="comment">% Intervalo de visualizaci&oacute;n del resultado</span>
+  ti = 0; <span class="comment">% Indice para el vector de resultados</span>
+  
+  pv=PrimerValor(h);
+  longitudFuncion=PrimerValor(h)-UltimoValor(h);
+  longitudFuncion=abs(longitudFuncion);
+  uv=UltimoValor(h);
+  
+  tvec = (pv-3):.1:(uv+longitudFuncion+3); <span class="comment">% traslaciones de t, cuantas integrales se calulan  </span>
+  y = NaN*zeros(1, length (tvec)); <span class="comment">% Resultados de acuerdo a cuantos t</span>
+  limSup = 2.5; <span class="comment">%Para mover la grafica</span>
+  limInf = -1.0;
+
+  <span class="keyword">for</span> t = tvec, <span class="comment">% Cantidad de traslaciones</span>
+      ti = ti+1; <span class="comment">% Indice para guardar el resultado (indice del tiempo)</span>
+      xh = x(t-tau).*h(tau); <span class="comment">% resultado de la multiplicaci&oacute;n </span>
+      lxh = length(xh); <span class="comment">% longitud del resultado</span>
+      y(ti) = sum(xh.*dtau); <span class="comment">% Base por altura, aproximaci&oacute;n de la integral</span>
+      subplot (2,1,1), <span class="comment">% gr&aacute;fica de 2 x 1 (primera)</span>
+      
+      plot(tau, h(tau), <span class="string">'r-'</span>, tau, x(t-tau), <span class="string">'g--'</span>, t, 0, <span class="string">'ob'</span>); <span class="comment">%graficas </span>
+      <span class="comment">%disp(y(ti));</span>
+      
+      axis ([tau(1) tau(end) -2.0 2.5]); <span class="comment">% l&iacute;mites de los ejes</span>
+
+      patch([tau(1:end-1); tau(1:end-1); tau(2:end); tau(2:end)],<span class="keyword">...</span>
+      [zeros(1,lxh-1);xh(1:end-1);xh(2:end);zeros(1,lxh-1)],<span class="keyword">...</span>
+      [.8 .8 .8], <span class="string">'edgecolor'</span>, <span class="string">'none'</span>);
+      xlabel(<span class="string">'\tau'</span>); <span class="comment">% Texto del eje X</span>
+      legend(<span class="string">'h(\tau)'</span>, <span class="string">'x(t-\tau)'</span>,<span class="string">'t'</span>,<span class="string">'h(\tau)x(t-\tau)'</span>)<span class="comment">% Caja de Texto  </span>
+      subplot (2, 1, 2)  <span class="comment">% gr&aacute;fica de 2 x 1 (segunda)</span>
+      plot (tvec, y, <span class="string">'k'</span>, tvec (ti), y(ti), <span class="string">'ok'</span>);
+      xlabel (<span class="string">'t'</span>); 
+      ylabel (<span class="string">'y(t) = \int h(\tau)x(t-\tau) d\tau'</span>);
+      
+      <span class="keyword">if</span>(y(ti) &gt; limSup)
+          limSup = y(ti);
+      <span class="keyword">end</span>
+      
+      <span class="keyword">if</span>(y(ti) &lt; limInf)
+          limInf = y(ti);
+      <span class="keyword">end</span>
+      axis ([tau(1) tau(end) limInf limSup]); <span class="comment">% l&iacute;mites del eje</span>
+      grid; <span class="comment">% malla</span>
+      drawnow; <span class="comment">% efecto de movimiento continuo</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+</pre><p>El archivo anterior utliza los siguientes archivos</p><pre class="language-matlab">
+<span class="keyword">function</span> [j] = UltimoValor(x)
+
+    <span class="keyword">for</span> i=1000:-0.01:-1000
+        <span class="keyword">if</span>(x(i) ~= 0)
+            <span class="comment">%disp(i);</span>
+            j=i;
+            <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span> 
+  
+
+</pre><p>Archivo UltimoValor</p><pre class="language-matlab">
+<span class="keyword">function</span> [j] = PrimerValor(x)
+
+    <span class="keyword">for</span> i=-1000:0.1:1000
+        <span class="keyword">if</span>(x(i) ~= 0)
+            <span class="comment">%disp(i);</span>
+            j=i;
+            <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span> 
+  
+
+</pre><p>Archivo PrimerValor</p><pre class="language-matlab">
+<span class="keyword">function</span> [c] = Finaliza(x,h)
+    c = UltimoValor(h) + UltimoValor(x); 
+    disp(c);
+<span class="keyword">end</span>
+
+</pre><p>Archivo Finaliza</p><pre class="language-matlab">
+<span class="keyword">function</span> [c] = Comienza(x,h)
+    c = PrimerValor(h) + PrimerValor(x); 
+    disp(c);
+<span class="keyword">end</span>
+
+</pre><p>Archivo Comienza</p><h2 id="16">PR04. Ejercicio 1.</h2><p><img vspace="5" hspace="5" src="Ej11.png" alt=""> </p><p><img vspace="5" hspace="5" src="Ej12.png" alt=""> </p><p>Grafica con la funci&oacute;n convoluci&oacute;n</p><pre class="codeinput">figure
+x = @(t) (t&gt;0 &amp; t&lt;1);
+k = x(linspace(-2,2));
+plot(linspace(-2,2), k);
+
+figure
+h = @(t) (-t+1).*(t&gt;0 &amp; t&lt;1) + (t-1).*(t&gt;1 &amp; t&lt;2);
+m = h(linspace(-1,3));
+plot(linspace(-1,3), m);
+
+convGral(x,h);
+</pre><pre class="codeoutput">    0.2000
+
+    2.9800
+
+</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <img vspace="5" hspace="5" src="main_02.png" alt=""> <img vspace="5" hspace="5" src="main_03.png" alt=""> <p><img vspace="5" hspace="5" src="ej13.PNG" alt=""> </p><h2 id="21">Grafica con piecewise</h2><p><img vspace="5" hspace="5" src="grafica1.png" alt=""> </p><p><img vspace="5" hspace="5" src="ConvoPractica4_01.png" alt=""> </p><h2 id="24">PR04. Ejercicio 3.</h2><p><img vspace="5" hspace="5" src="ej21.PNG" alt=""> </p><p><img vspace="5" hspace="5" src="ej22.PNG" alt=""> </p><p>Grafica con la funci&oacute;n convoluci&oacute;n</p><pre class="codeinput">figure
+x = @(t) (t&gt;1 &amp; t&lt;3);
+k = x(linspace(-1,4));
+plot(linspace(-1,4), k);
+
+figure
+h = @(t) (t).*(t&gt;0 &amp; t&lt;=1) + (t&gt;1 &amp; t&lt;2);
+m = linspace(-1,3);
+plot(m, h(m));
+
+convGral(x,h);
+</pre><pre class="codeoutput">    1.2000
+
+    4.9800
+
+</pre><img vspace="5" hspace="5" src="main_04.png" alt=""> <img vspace="5" hspace="5" src="main_05.png" alt=""> <img vspace="5" hspace="5" src="main_06.png" alt=""> <p><img vspace="5" hspace="5" src="ej23.PNG" alt=""> </p><p>Gr&aacute;fica con piecewise</p><p><img vspace="5" hspace="5" src="grafica2.png" alt=""> </p><p><img vspace="5" hspace="5" src="ConvoPractica4_02.png" alt=""> </p><h2 id="32">PR06. Ejercicio E.</h2><p>Autocorrelacion de la siguiente se&ntilde;al</p><p><img vspace="5" hspace="5" src="ej31.PNG" alt=""> </p><pre class="codeinput">x =@(t) (t&gt;0 &amp; t&lt;3) - (t&gt;=3 &amp; t&lt;4);
+h = @(t) -(t&gt;=-4 &amp; t&lt;-3) + (t&gt;=-3 &amp; t&lt;=0);
+
+<span class="comment">%Para graficar</span>
+m = linspace(-1, 5);
+figure
+plot(m, x(m));
+
+k = linspace(-5, 1);
+figure
+plot(k, h(k));
+
+<span class="comment">% Gr&aacute;fica con la funci&oacute;n convoluci&oacute;n</span>
+convGral(x,h);
+</pre><pre class="codeoutput">   -3.9000
+
+    3.9900
+
+</pre><img vspace="5" hspace="5" src="main_07.png" alt=""> <img vspace="5" hspace="5" src="main_08.png" alt=""> <img vspace="5" hspace="5" src="main_09.png" alt=""> <p><img vspace="5" hspace="5" src="ej32.PNG" alt=""> </p><p>Gr&aacute;fica con piecewise</p><p><img vspace="5" hspace="5" src="grafica3.png" alt=""> </p><p><img vspace="5" hspace="5" src="ConvoPractica4_03.png" alt=""> </p><h2 id="38">PR06. Ejercicio F.</h2><p>Correlacion de la siguiente se&ntilde;al</p><p><img vspace="5" hspace="5" src="ej41.PNG" alt=""> </p><pre class="codeinput"><span class="comment">%&lt;&lt;ej42.PNG&gt;&gt;</span>
+
+x1 =@(t) (t&gt;0 &amp; t&lt;3) - (t&gt;=3 &amp; t&lt;4);
+x0 = @(t) (t&gt;=0 &amp; t&lt;2) - (t&gt;=2&amp; t&lt;=4);
+
+x0_prima = @(t) -(t&gt;=-4 &amp; t&lt;-2) + (t&gt;=-2&amp; t&lt;=0);
+
+<span class="comment">%Para graficar</span>
+g = linspace(-1, 5);
+figure
+plot(g, x1(g));
+
+w = linspace(-4, 5);
+figure
+plot(w, x0(w));
+
+d = linspace(-5, 1);
+figure
+plot(d, x0_prima(d));
+
+<span class="comment">% Gr&aacute;fica con la funci&oacute;n convoluci&oacute;n</span>
+convGral(x1,x0_prima);
+</pre><pre class="codeoutput">   -3.9000
+
+    3.9900
+
+</pre><img vspace="5" hspace="5" src="main_10.png" alt=""> <img vspace="5" hspace="5" src="main_11.png" alt=""> <img vspace="5" hspace="5" src="main_12.png" alt=""> <img vspace="5" hspace="5" src="main_13.png" alt=""> <p><img vspace="5" hspace="5" src="ej43.PNG" alt=""> </p><p>Gr&aacute;fica con piecewise</p><p><img vspace="5" hspace="5" src="grafica4.png" alt=""> </p><p><img vspace="5" hspace="5" src="ConvoPractica4_04.png" alt=""> </p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Practica 4. Convolución y Correlación de señales en tiempo continuo
+% RPL04
+%% Integrantes
+% 
+% # Garduño Sandoval Susana Itzel
+% # Villavicencio Castillo Rodrigo Adrian
+% # Vargas Martinez Javier
+% 
+
+%% Objetivos
+% 
+% # Conocer métodos básicos de integración numérica
+% # Manipulación de instrucciones en MATLAB
+% # Simular convoluciones y correlaciones de señales continuas
+%% Introducción
+% Como introducción elabore un reporte de los métodos descritos 
+% en la lista de reproducción que incluya el desarrollo de los ejemplos expuestos.
+%%
+% <<img1.jpg>>
+%%
+% <<img2.jpg>>
+%%
+% <<img3.jpg>>
+%%
+% <<img4.jpg>>
+%%
+% <<img5.jpg>>
+%%
+% <<img5.jpg>>
+%% Nota
+% Se realizo un cambio al archivo convconm convirtiendola en convGrl. Es en
+% convGral donde se trato de hacerlo más general, haciendo que la gráfica
+% se acomodara automaticamente en lo largo (encontrando en donde
+% iba a existir la convolución) y en la altura (determinando los puntos más
+% grandes que de la convolución)
+%%
+% <include>convGral.m</include>
+%
+% El archivo anterior utliza los siguientes archivos
+%%
+% <include>UltimoValor.m</include>
+%
+% Archivo UltimoValor
+%% 
+% <include>PrimerValor.m</include>
+%
+% Archivo PrimerValor
+%% 
+% <include>Finaliza.m</include>
+%
+% Archivo Finaliza
+%%
+% <include>Comienza.m</include>
+%
+% Archivo Comienza
+%% PR04. Ejercicio 1.
+%%
+% <<Ej11.png>>
+%%
+% <<Ej12.png>>
+
+%%
+% Grafica con la función convolución
+figure
+x = @(t) (t>0 & t<1);
+k = x(linspace(-2,2));
+plot(linspace(-2,2), k);
+
+figure
+h = @(t) (-t+1).*(t>0 & t<1) + (t-1).*(t>1 & t<2);
+m = h(linspace(-1,3));
+plot(linspace(-1,3), m);
+
+convGral(x,h);
+%%
+% <<ej13.PNG>>
+
+%% Grafica con piecewise
+%%
+% <<grafica1.png>>
+%%
+% <<ConvoPractica4_01.png>>
+
+%% PR04. Ejercicio 3.
+%%
+% <<ej21.PNG>>
+%%
+% <<ej22.PNG>>
+%%
+% Grafica con la función convolución
+figure
+x = @(t) (t>1 & t<3);
+k = x(linspace(-1,4));
+plot(linspace(-1,4), k);
+
+figure
+h = @(t) (t).*(t>0 & t<=1) + (t>1 & t<2);
+m = linspace(-1,3);
+plot(m, h(m));
+
+convGral(x,h);
+%%
+% <<ej23.PNG>>
+
+%%
+% Gráfica con piecewise
+%%
+% <<grafica2.png>>
+%%
+% <<ConvoPractica4_02.png>>
+
+%% 	PR06. Ejercicio E.
+% Autocorrelacion de la siguiente señal
+%%
+% <<ej31.PNG>>
+x =@(t) (t>0 & t<3) - (t>=3 & t<4);
+h = @(t) -(t>=-4 & t<-3) + (t>=-3 & t<=0);
+
+%Para graficar
+m = linspace(-1, 5);
+figure
+plot(m, x(m));
+
+k = linspace(-5, 1);
+figure
+plot(k, h(k));
+
+% Gráfica con la función convolución
+convGral(x,h);
+
+%%
+% <<ej32.PNG>>
+
+%%
+% Gráfica con piecewise
+%%
+% <<grafica3.png>>
+%%
+% <<ConvoPractica4_03.png>>
+
+%% 	PR06. Ejercicio F.
+% Correlacion de la siguiente señal
+%%
+% <<ej41.PNG>>
+%%
+%<<ej42.PNG>>
+
+x1 =@(t) (t>0 & t<3) - (t>=3 & t<4);
+x0 = @(t) (t>=0 & t<2) - (t>=2& t<=4);
+
+x0_prima = @(t) -(t>=-4 & t<-2) + (t>=-2& t<=0);
+
+%Para graficar
+g = linspace(-1, 5);
+figure
+plot(g, x1(g));
+
+w = linspace(-4, 5);
+figure
+plot(w, x0(w));
+
+d = linspace(-5, 1);
+figure
+plot(d, x0_prima(d));
+
+% Gráfica con la función convolución
+convGral(x1,x0_prima);
+%%
+% <<ej43.PNG>>
+
+%%
+% Gráfica con piecewise
+%%
+% <<grafica4.png>>
+%%
+% <<ConvoPractica4_04.png>>
+
+##### SOURCE END #####
+--></body></html>
