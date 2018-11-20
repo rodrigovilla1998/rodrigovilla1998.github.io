@@ -1,0 +1,231 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Practica 05. Series de Fourier en tiempo continuo</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-19"><meta name="DC.source" content="SysPrac5RodrigoVillavicencio.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Practica 05. Series de Fourier en tiempo continuo</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes</a></li><li><a href="#2">Objetivos</a></li><li><a href="#3">Introducci&Atilde;&sup3;n</a></li><li><a href="#4">Instrucciones</a></li><li><a href="#5">Ejemplo 6.1</a></li><li><a href="#6">Ejemplo 6.2</a></li><li><a href="#7">Ejemplo 6.4</a></li><li><a href="#8">Ejemplo 6.5</a></li><li><a href="#9">Ejemplo 6.7</a></li><li><a href="#10">Ejercicio 06</a></li><li><a href="#12">Ejercicio 07</a></li><li><a href="#14">Conclusiones</a></li><li><a href="#15">Referencias</a></li><li><a href="#16">Integracion</a></li></ul></div><h2>Integrantes<a name="1"></a></h2><div><ol><li>Vargas Martinez Javier</li><li>Villavicencio Castillo Rodrigo Adrian</li></ol></div><h2>Objetivos<a name="2"></a></h2><div><ul><li>Realizar gr&Atilde;&iexcl;ficas de series de Fourier exponenciales y trigonom&Atilde;&copy;tricas en tiempo continuo</li><li>Manipulaci&Atilde;&sup3;n de instrucciones en MATLAB</li><li>Calculo n&Atilde;&ordm;merico de los coeficientes de Fourier</li></ul></div><h2>Introducci&Atilde;&sup3;n<a name="3"></a></h2><pre>Aproximaci&Atilde;&sup3;n n&Atilde;&ordm;merica de los coeficientes de Fourier exponencial compleja</pre><h2>Instrucciones<a name="4"></a></h2><div><ol><li>Realizar el programa de la serie que se indica</li><li>Gr&Atilde;&iexcl;fica de la serie de Fourier en un intervalo que muestre 5 repeticiones</li><li>Gr&Atilde;&iexcl;fica de la se&Atilde;&plusmn;al y la serie de Fourier para 4 armonicos</li><li>Gr&Atilde;&iexcl;fica del error</li><li>Gr&Atilde;&iexcl;fica de la energ&Atilde;&shy;a del error</li><li>Espectro de magnitud para 4 armonicos</li><li>Espectro de fase para 4 armonicos</li><li>Todo lo anterior para 15 armonicos</li></ol></div><h2>Ejemplo 6.1<a name="5"></a></h2><p>Con serie y espectro trigonometrico, no es necesario entregar el c&Atilde;&sup3;digo, solo la aplicaci&Atilde;&sup3;n al problema especifico, debe de indicar la funci&Atilde;&sup3;n y los valores de sus coeficientes (sin incluir el procedimiento)</p><h2>Ejemplo 6.2<a name="6"></a></h2><pre>Con serie y espectro exponencial y A=3, no es necesario entregar el c&Atilde;&sup3;digo, solo la aplicaci&Atilde;&sup3;n al problema especifico, debe de indicar la funci&Atilde;&sup3;n y los valores de sus coeficientes (sin incluir el procedimiento)</pre><pre class="codeinput">dn=@(n) (12)/(n^2*pi^2)*j*sin((n*pi)/2);
+d0=0;
+t0=-1/2;
+tf=3/2;
+f=@(t) 6.*t.*(t&gt;-1/2 &amp; t&lt;1/2) + 6.*(1-t).*(t&gt;1/2 &amp; t&lt;3/2);
+armo=4;
+a=-7;
+b=-7;
+figure
+sfc(t0,tf,dn,d0,f,armo,a,b)
+figure
+sfc(t0,tf,dn,d0,f,15,a,b)
+</pre><img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_01.png" alt=""> <img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_02.png" alt=""> <h2>Ejemplo 6.4<a name="7"></a></h2><p>Con serie y espectro exponencial, no es necesario entregar el c&Atilde;&sup3;digo, solo la aplicaci&Atilde;&sup3;n al problema especifico, debe de indicar la funci&Atilde;&sup3;n y los valores de sus coeficientes (sin incluir el procedimiento)</p><pre class="codeinput">syms <span class="string">t</span>
+f=@(t) rectangularPulse(t);
+[rectangularPulse(sym(-1))
+ rectangularPulse(sym(-1/2))
+ rectangularPulse(sym(0))
+ rectangularPulse(sym(1/2))
+ rectangularPulse(sym(1))];
+<span class="comment">%%fplot(f(t));</span>
+d0=0.5;
+dn=@(n) (sin(pi*n/2))/(pi*n);
+t0=-pi/2;
+tf=pi/2;
+armo=4;
+a=-6.5;
+b=10;
+
+figure
+sfc(t0,tf,dn,d0,f,armo,a,b)
+
+<span class="comment">% para 15 armonicos</span>
+sfc(t0,tf,dn,d0,f,15,a,b)
+</pre><img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_03.png" alt=""> <img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_04.png" alt=""> <h2>Ejemplo 6.5<a name="8"></a></h2><p>Con serie y espectro exponencial, no es necesario entregar el c&Atilde;&sup3;digo, solo la aplicaci&Atilde;&sup3;n al problema especifico, debe de indicar la funci&Atilde;&sup3;n y los valores de sus coeficientes (sin incluir el procedimiento) Realizamos lo siguiente:</p><pre class="codeinput">d0=0.504;
+dn=@(n) 0.504/(1+4*n*j);
+t0=0;
+tf=pi;
+f=@(t) exp(-t/2);
+armo=4;
+a=-6.5;
+b=11;
+
+figure
+sfc(t0,tf,dn,d0,f,armo,a,b)
+<span class="comment">%</span>
+<span class="comment">% Para 15 armonicos</span>
+figure
+sfc(t0,tf,dn,d0,f,15,a,b)
+</pre><img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_05.png" alt=""> <img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_06.png" alt=""> <img vspace="5" hspace="5" src="SysPrac5RodrigoVillavicencio_07.png" alt=""> <h2>Ejemplo 6.7<a name="9"></a></h2><p>Con serie y espectro exponencial y <img src="SysPrac5RodrigoVillavicencio_eq04938.png" alt="$T_0=3$"> sin incluir la gr&Atilde;&iexcl;fica de f, error ni energ&Atilde;&shy;a del error, no es necesario entregar el c&Atilde;&sup3;digo, solo la aplicaci&Atilde;&sup3;n al problema especifico, debe de indicar la funci&Atilde;&sup3;n y los valores de sus coeficientes (sin incluir el procedimiento)</p><h2>Ejercicio 06<a name="10"></a></h2><p>Elabore un c&Atilde;&sup3;digo similar al COMPUTER EXAMPLE C6.2 que se encuentra al final de la secci&Atilde;&sup3;n 6.2 de Lathi para el Ejempo 6.2 con los datos indicados anteriormente (no utilice inline)</p><p><a href="include&gt;ComputerEX62.m</include">include&gt;ComputerEX62.m&lt;/include</a></p><h2>Ejercicio 07<a name="12"></a></h2><p>Elabore un c&Atilde;&sup3;digo que implemente el algoritmo de trapecio compuesto para <img src="SysPrac5RodrigoVillavicencio_eq09348.png" alt="$n=15$">, Utilice este c&Atilde;&sup3;digo para aproximar <img src="SysPrac5RodrigoVillavicencio_eq30284.png" alt="$D_0,...,D_4$"> del ejemplo de la pr&Atilde;&iexcl;ctica. Ahora implemente el c&Atilde;&sup3;digo COMPUTER EXAMPLE C6.4 que se encuentra al final de la secci&Atilde;&sup3;n 6.6 de Lathi, y calcule nuevamente el los coeficientes <img src="SysPrac5RodrigoVillavicencio_eq30284.png" alt="$D_0,...,D_4$"> del ejemplo propuesto. Muestre una tabla que contenga los coeficientes mencionados calculados con los dos algoritmos y de forma exacta, &Acirc;&iquest;Qu&Atilde;&copy; algortmo aproxima mejor a los coeficientes?, para esto compare los coefientes con el valor absoluto de la resta.</p><p><a href="include&gt;ComputerEX64.m</include">include&gt;ComputerEX64.m&lt;/include</a></p><pre class="codeinput"><span class="comment">%</span>
+</pre><h2>Conclusiones<a name="14"></a></h2><p>Conclusi&Atilde;&sup3;n: En esta practica vimos la funci&Atilde;&sup3;n de la serie de fourier, las diferentes maneras de calcularlo y las particularidades en cuanto al n&Atilde;&ordm;mero de armonicos solicitados, entre mayor sea el n&Atilde;&ordm;mero, la serie tiende a ser m&Atilde;&iexcl;s similar que la funci&Atilde;&sup3;n original</p><h2>Referencias<a name="15"></a></h2><h2>Integracion<a name="16"></a></h2><p><a href="include&gt;https://www.youtube.com/watch?v=6i4N328QbpY&amp;t=0s&amp;index=6&amp;list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD</include">include&gt;https://www.youtube.com/watch?v=6i4N328QbpY&amp;t=0s&amp;index=6&amp;list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD&lt;/include</a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Practica 05. Series de Fourier en tiempo continuo
+%
+%% Integrantes
+% # Vargas Martinez Javier
+% # Villavicencio Castillo Rodrigo Adrian
+%
+%% Objetivos
+% * Realizar grÃ¡ficas de series de Fourier exponenciales y trigonomÃ©tricas en tiempo continuo
+% * ManipulaciÃ³n de instrucciones en MATLAB
+% * Calculo nÃºmerico de los coeficientes de Fourier
+%
+%% IntroducciÃ³n
+%  AproximaciÃ³n nÃºmerica de los coeficientes de Fourier exponencial compleja
+%
+%% Instrucciones
+% # Realizar el programa de la serie que se indica
+% # GrÃ¡fica de la serie de Fourier en un intervalo que muestre 5 repeticiones
+% # GrÃ¡fica de la seÃ±al y la serie de Fourier para 4 armonicos
+% # GrÃ¡fica del error
+% # GrÃ¡fica de la energÃ­a del error
+% # Espectro de magnitud para 4 armonicos
+% # Espectro de fase para 4 armonicos
+% # Todo lo anterior para 15 armonicos
+%
+%% Ejemplo 6.1
+% Con serie y espectro trigonometrico, no es necesario entregar el cÃ³digo, solo la aplicaciÃ³n al problema especifico, debe de indicar la funciÃ³n y los valores de sus coeficientes (sin incluir el procedimiento)
+%
+%% Ejemplo 6.2
+%  Con serie y espectro exponencial y A=3, no es necesario entregar el cÃ³digo, solo la aplicaciÃ³n al problema especifico, debe de indicar la funciÃ³n y los valores de sus coeficientes (sin incluir el procedimiento)
+dn=@(n) (12)/(n^2*pi^2)*j*sin((n*pi)/2);
+d0=0;
+t0=-1/2;
+tf=3/2;
+f=@(t) 6.*t.*(t>-1/2 & t<1/2) + 6.*(1-t).*(t>1/2 & t<3/2);
+armo=4;
+a=-7;
+b=-7;
+figure
+sfc(t0,tf,dn,d0,f,armo,a,b)
+figure
+sfc(t0,tf,dn,d0,f,15,a,b)
+
+%% Ejemplo 6.4
+% Con serie y espectro exponencial, no es necesario entregar el cÃ³digo, solo la aplicaciÃ³n al problema especifico, debe de indicar la funciÃ³n y los valores de sus coeficientes (sin incluir el procedimiento)
+%
+
+syms t
+f=@(t) rectangularPulse(t);
+[rectangularPulse(sym(-1))
+ rectangularPulse(sym(-1/2))
+ rectangularPulse(sym(0))
+ rectangularPulse(sym(1/2))
+ rectangularPulse(sym(1))];
+%%fplot(f(t));
+d0=0.5;
+dn=@(n) (sin(pi*n/2))/(pi*n);
+t0=-pi/2;
+tf=pi/2;
+armo=4;
+a=-6.5;
+b=10;
+
+figure
+sfc(t0,tf,dn,d0,f,armo,a,b)
+
+% para 15 armonicos
+sfc(t0,tf,dn,d0,f,15,a,b)
+
+%% Ejemplo 6.5
+% Con serie y espectro exponencial, no es necesario entregar el cÃ³digo, solo la aplicaciÃ³n al problema especifico, debe de indicar la funciÃ³n y los valores de sus coeficientes (sin incluir el procedimiento)
+% Realizamos lo siguiente:
+d0=0.504;
+dn=@(n) 0.504/(1+4*n*j);
+t0=0;
+tf=pi;
+f=@(t) exp(-t/2);
+armo=4;
+a=-6.5;
+b=11;
+
+figure
+sfc(t0,tf,dn,d0,f,armo,a,b)
+%
+% Para 15 armonicos
+figure
+sfc(t0,tf,dn,d0,f,15,a,b)
+
+%% Ejemplo 6.7
+% Con serie y espectro exponencial y $T_0=3$ sin incluir la grÃ¡fica de f, error ni energÃ­a del error, no es necesario entregar el cÃ³digo, solo la aplicaciÃ³n al problema especifico, debe de indicar la funciÃ³n y los valores de sus coeficientes (sin incluir el procedimiento)
+
+
+%% Ejercicio 06
+% Elabore un cÃ³digo similar al COMPUTER EXAMPLE C6.2 que se encuentra al final de la secciÃ³n 6.2 de Lathi para el Ejempo 6.2 con los datos indicados anteriormente (no utilice inline)
+%%
+% <include>ComputerEX62.m</include>
+%
+
+%% Ejercicio 07
+% Elabore un cÃ³digo que implemente el algoritmo de trapecio compuesto para $n=15$, Utilice este cÃ³digo para aproximar $D_0,...,D_4$ del ejemplo de la prÃ¡ctica. Ahora implemente el cÃ³digo COMPUTER EXAMPLE C6.4 que se encuentra al final de la secciÃ³n 6.6 de Lathi, y calcule nuevamente el los coeficientes $D_0,...,D_4$ del ejemplo propuesto. Muestre una tabla que contenga los coeficientes mencionados calculados con los dos algoritmos y de forma exacta, Â¿QuÃ© algortmo aproxima mejor a los coeficientes?, para esto compare los coefientes con el valor absoluto de la resta.
+%%
+% <include>ComputerEX64.m</include>
+ 
+%
+
+%% Conclusiones
+% ConclusiÃ³n: En esta practica vimos la funciÃ³n de la serie de fourier, las diferentes maneras de calcularlo y las particularidades en cuanto al nÃºmero de armonicos solicitados, entre mayor sea el nÃºmero, la serie tiende a ser mÃ¡s similar que la funciÃ³n original
+
+%% Referencias
+%% Integracion
+% <include>https://www.youtube.com/watch?v=6i4N328QbpY&t=0s&index=6&list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD</include>
+##### SOURCE END #####
+--></body></html>
